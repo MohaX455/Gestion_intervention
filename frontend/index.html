@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nata+Sans:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+    </style>
+    <title>Dashboard | Admin</title>
+</head>
+
+<body class="h-screen flex flex-col text-[#333] tracking-wide">
+
+    <!-- Navbar -->
+    <header
+        class="h-[7.75vh] border-[1.5px] border-[rgba(0_0_0_/_0.175)] flex flex-row-reverse md:flex-row justify-between items-center px-4 md:px-8 flex-shrink-0">
+        <div class="flex justify-center items-center gap-2">
+            <a href="./index.html"
+                class="text-[20px] font-medium cursor-pointer flex justify-center items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="text-[#333] lucide lucide-circle-gauge-icon lucide-circle-gauge">
+                    <path d="M15.6 2.7a10 10 0 1 0 5.7 5.7" />
+                    <circle cx="12" cy="12" r="2" />
+                    <path d="M13.4 10.6 19 5" />
+                </svg>
+                Dashboard
+            </a>
+        </div>
+
+        <button class="flex justify-center items-center gap-2 cursor-pointer bg-[#444] text-white h-10 w-20 rounded-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-[#fff] lucide lucide-plus-icon lucide-plus">
+                <path d="M5 12h14" />
+                <path d="M12 5v14" />
+            </svg>
+            Add
+        </button>
+
+        <div id="toggleBtn" class="md:hidden h-[13px] w-[25px] flex flex-col justify-between cursor-pointer">
+            <span class="h-[3px] w-full bg-[#555] rounded-full"></span>
+            <span class="h-[3px] w-[18px] bg-[#555] rounded-full"></span>
+        </div>
+    </header>
+
+    <!-- Partie principale -->
+    <div class="flex flex-col md:h-[92.25vh]">
+        <div class="flex flex-1 md:overflow-hidden">
+            <!-- Sidebar -->
+            <aside
+                class="hidden md:flex flex-col justify-between w-60 border-r-[1.5px] border-[rgba(0_0_0_/_0.175)] flex-shrink-0 py-13 px-7">
+                <div class="font-medium flex flex-col gap-1.5 w-full">
+                    <a href="./index.html"
+                        class="flex gap-2 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-house-icon lucide-house">
+                            <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+                            <path
+                                d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        </svg>
+                        Home
+                    </a>
+                    <a href="./pages/technician.html"
+                        class="flex gap-2 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-wrench-icon lucide-wrench">
+                            <path
+                                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" />
+                        </svg>
+                        Technicians
+                    </a>
+                    <a href="./pages/orderList.html"
+                        class="flex gap-2 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-clipboard-check-icon lucide-clipboard-check">
+                            <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                            <path d="m9 14 2 2 4-4" />
+                        </svg>
+                        Order list
+                    </a>
+                    <a href="./pages/reports.html"
+                        class="flex gap-2 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-trending-up-icon lucide-trending-up">
+                            <path d="M16 7h6v6" />
+                            <path d="m22 7-8.5 8.5-5-5L2 17" />
+                        </svg>
+                        Reports
+                    </a>
+                    <a href="./pages/historical.html"
+                        class="flex gap-2 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-clock-icon lucide-clock">
+                            <path d="M12 6v6l4 2" />
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                        Historical
+                    </a>
+                </div>
+                <div>
+                    <button id="logout"
+                        class="flex gap-2 items-center font-medium text-red-500 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)] cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-log-out-icon lucide-log-out">
+                            <path d="m16 17 5-5-5-5" />
+                            <path d="M21 12H9" />
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        </svg>
+                        Logout
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Contenu -->
+            <main class="flex-1 bg-gray-100 md:overflow-y-auto h-fit md:h-full w-full py-6 px-8">
+                <h1 class="ml-6 text-2xl mt-2 mb-8 font-medium flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="text-blue-500 lucide lucide-activity-icon lucide-activity">
+                        <path
+                            d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
+                    </svg>
+                    Global View
+                </h1>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 min-h-[200px]">
+                    <div
+                        class="rounded-3xl p-6 bg-white border-[1.5px] border-[rgba(0_0_0_/_0.125)] cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_10px_rgba(0_0_0_/_0.05)] flex justify-center items-center gap-6">
+                        <img src="./assets/icons/icon5.png" alt="" class="w-[25%]">
+                        <div class="flex flex-col justify-center text-[19px] font-medium h-full flex-1">
+                            <p>Intervention Number</p>
+                            <span class="text-green-500 text-[45px] font-[Montserrat] tracking-wider">200</span>
+                        </div>
+                    </div>
+                    <div
+                        class="rounded-3xl p-6 bg-white border-[1.5px] border-[rgba(0_0_0_/_0.125)] cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_10px_rgba(0_0_0_/_0.05)] flex justify-center items-center gap-6">
+                        <img src="./assets/icons/icon4.png" alt="" class="w-[25%]">
+                        <div class="flex flex-col justify-center text-[19px] font-medium h-full flex-1">
+                            <p>Available Technicians</p>
+                            <span class="text-purple-500 text-[45px] font-[Montserrat] tracking-wider">15</span>
+                        </div>
+                    </div>
+                    <div
+                        class="rounded-3xl p-6 bg-white border-[1.5px] border-[rgba(0_0_0_/_0.125)] cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_10px_rgba(0_0_0_/_0.05)] flex justify-center items-center gap-6">
+                        <img src="./assets/icons/icon2.png" alt="" class="w-[25%]">
+                        <div class="flex flex-col justify-center text-[19px] font-medium h-full flex-1">
+                            <p>New Intervention</p>
+                            <span class="text-red-500 text-[45px] font-[Montserrat] tracking-wider">3</span>
+                        </div>
+                    </div>
+                    <div
+                        class="rounded-3xl p-6 bg-white border-[1.5px] border-[rgba(0_0_0_/_0.125)] cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_10px_rgba(0_0_0_/_0.05)] flex justify-center items-center gap-6">
+                        <img src="./assets/icons/icon1.png" alt="" class="w-[25%]">
+                        <div class="flex flex-col justify-center text-[19px] font-medium h-full flex-1">
+                            <p>Pending Interventions</p>
+                            <span class="text-orange-500 text-[45px] font-[Montserrat] tracking-wider">5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h1 class="ml-6 text-2xl my-8 font-medium flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                        class="text-red-500 lucide lucide-chart-spline-icon lucide-chart-spline">
+                        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+                        <path d="M7 16c.5-2 1.5-7 4-7 2 0 2 3 4 3 2.5 0 4.5-5 5-7" />
+                    </svg>
+                    Interventions Statistics
+                </h1>
+
+                <div
+                    class="p-6 px-12 bg-white rounded-2xl mb-10 md:h-[450px] h-fit w-full flex flex-col max-md:gap-6 md:flex-row justify-between items-center border-[1.5px] border-[rgba(0_0_0_/_0.125)]">
+                    <div class="md:w-1/2 h-1/2 md:h-full w-full flex items-center">
+                        <canvas id="interventionChart"></canvas>
+                        <!-- <h3>Répartition des interventions par type</h3> -->
+                    </div>
+
+                    <div class="md:w-1/2 h-1/2 md:h-full w-full flex items-center">
+                        <canvas id="barChart"></canvas>
+                        <!-- <h3>Nombre d’interventions par mois</h3> -->
+                    </div>
+                </div>
+
+
+                <!--  -->
+
+                <div
+                    class="p-6 bg-white rounded-2xl mt-12 mb-6 h-[500px] flex flex-col border-[1.5px] border-[rgba(0_0_0_/_0.125)]">
+                    <h1 class="ml-6 text-2xl mt-2 mb-8 font-medium flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-orange-500 lucide lucide-list-check-icon lucide-list-check">
+                            <path d="M11 18H3" />
+                            <path d="m15 18 2 2 4-4" />
+                            <path d="M16 12H3" />
+                            <path d="M16 6H3" />
+                        </svg>
+                        Recent Interventions
+                    </h1>
+                    <div class="overflow-x-auto flex-1 border border-gray-200 rounded-2xl">
+                        <table class="w-full text-left h-full">
+                            <thead class="bg-gray-100 border-b border-gray-200">
+                                <tr>
+                                    <th class="px-4 py-2">#</th>
+                                    <th class="px-4 py-2">Client</th>
+                                    <th class="px-4 py-2">Technicien</th>
+                                    <th class="px-4 py-2">Date</th>
+                                    <th class="px-4 py-2">Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="px-4 py-2">1</td>
+                                    <td class="px-4 py-2">Entreprise A</td>
+                                    <td class="px-4 py-2">Jean</td>
+                                    <td class="px-4 py-2">2025-08-20</td>
+                                    <td class="px-4 py-2"><span
+                                            class="px-4 py-2 rounded-full bg-yellow-100 text-yellow-700">En cours</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2">2</td>
+                                    <td class="px-4 py-2">Entreprise B</td>
+                                    <td class="px-4 py-2">Amina</td>
+                                    <td class="px-4 py-2">2025-08-18</td>
+                                    <td class="px-4 py-2"><span
+                                            class="px-4 py-2 rounded-full bg-green-100 text-green-700">Terminée</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2">3</td>
+                                    <td class="px-4 py-2">Entreprise C</td>
+                                    <td class="px-4 py-2">Paul</td>
+                                    <td class="px-4 py-2">2025-08-15</td>
+                                    <td class="px-4 py-2"><span
+                                            class="px-4 py-2 rounded-full bg-red-100 text-red-700">En attente</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div>
+
+                </div>
+
+            </main>
+
+        </div>
+
+        <!-- Footer -->
+        <footer>
+
+        </footer>
+
+    </div>
+    <script src="./js/script.js" defer></script>
+    <script src="./js/diagram.js" defer></script>
+</body>
+
+</html>
