@@ -5,16 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
     <title>Login</title>
 </head>
 
 <body
-    class="h-screen w-full flex justify-start items-center tracking-wide bg-[url('../assets/pictures/picture3.jpg')] md:bg-[url('../assets/pictures/picture2.jpg')] bg-center bg-no-repeat bg-cover text-[white]">
+    class="h-screen w-full flex justify-start items-center tracking-wide bg-[url('./assets/pictures/picture3.jpg')] md:bg-[url('./assets/pictures/picture2.jpg')] bg-center bg-no-repeat bg-cover text-[white]">
 
     <div class="w-full md:w-1/2 md:h-[80%] md:border-r-[1.5px] border-[rgba(255_255_255_/_0.5)] flex justify-center items-center">
         <div class="h-full w-full md:h-auto p-3 md:max-w-[500px] md:p-5">
-            <form id="form" action="" class="flex flex-col gap-9">
-                <h2 class="text-3xl font-medium max-md:text-center md:ml-10 text-white">Admin Hub .</h2>
+            <form id="form" action="" class="flex flex-col gap-9" autocomplete="off">
+                <h2 class="text-3xl font-medium max-md:text-center md:ml-10 text-white">Login Hub .</h2>
                 <p class="text-[rgba(255_255_255_/_0.8)] max-md:text-center md:ml-2.5 tracking-wider">Sign in to access your dashboard.</p>
                 <div class="flex flex-col gap-7">
                     <!-- Username -->
@@ -69,16 +70,16 @@
                     </svg>
                     Login
                 </button>
-                <p class="text-[rgba(255_255_255_/_0.8)] ml-2.5 tracking-wider max-md:text-center">No account ? <a href="./signup.html"
+                <!-- <p class="text-[rgba(255_255_255_/_0.8)] ml-2.5 tracking-wider max-md:text-center">No account ? <a href="./signup.html"
                         class="text-[rgba(255_255_255_/_0.6)] hover:text-[rgba(255_255_255_/_0.8)] hover:underline">Register
                         in
-                        seconds</a></p>
+                        seconds</a></p> -->
             </form>
         </div>
     </div>
 
-    <script src="../js/signup_login_lock.js" defer></script>
-    <script src="../js/login.js"></script>
+    <script src="./js/signup_login_lock.js" defer></script>
+    <script src="./js/login.js"></script>
 </body>
 
 </html>

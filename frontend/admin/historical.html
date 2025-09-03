@@ -5,16 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Technicians</title>
+    <title>Dashboard | Admin</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nata+Sans:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+        /* Cache la scrollbar mais garde le scroll */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            /* IE et Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
 </head>
 
-<body class="h-screen flex flex-col text-[#333] tracking-wide">
+<body class="h-screen flex flex-col text-[#333] tracking-wide font-['Quicksand']">
 
     <!-- Navbar -->
     <header
         class="h-[7.75vh] border-[1.5px] border-[rgba(0_0_0_/_0.175)] flex flex-row-reverse md:flex-row justify-between items-center px-4 md:px-8 flex-shrink-0">
         <div class="flex justify-center items-center">
-            <a href="../index.html" class="text-[20px] font-medium cursor-pointer flex justify-center items-center gap-2">
+            <a href="./admin.html"
+                class="text-[20px] font-medium cursor-pointer flex justify-center items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-circle-gauge-icon lucide-circle-gauge">
@@ -22,8 +38,54 @@
                     <circle cx="12" cy="12" r="2" />
                     <path d="M13.4 10.6 19 5" />
                 </svg>
-                Dashboard Technicians
+                Dashboard
             </a>
+        </div>
+
+        <div class="flex justify-center items-center gap-20">
+
+            <div class="hidden md:block relative w-100">
+                <input type="text" placeholder="Search..."
+                    class="w-full pl-10 pr-4 py-2 rounded-full border-[1.5px] border-[rgba(0_0_0_/_0.2)] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition" />
+                <!-- Icône de recherche -->
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search-icon lucide-search">
+                        <path d="m21 21-4.34-4.34" />
+                        <circle cx="11" cy="11" r="8" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="flex justify-center items-center">
+                <!-- Icône cloche -->
+                <button class="text-gray-600 hover:text-gray-800 relative cursor-pointer rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="h-7 w-7 text-gray-500 lucide lucide-bell-icon lucide-bell">
+                        <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+                        <path
+                            d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
+                    </svg>
+                    <!-- Badge -->
+                    <span class="absolute -top-1.5 -right-1 bg-red-500 border-2 border-white text-white text-xs px-1 rounded-full font-bold">
+                        5
+                    </span>
+                </button>
+            </div>
+
+            <div class="hidden md:flex justify-center items-center gap-2 h-full">
+                <p class="text-[16px] font-[600] flex justify-center items-center flex-col h-full mt-1.5">
+                    <span>
+                        <img src="../assets/icons/icon6.png" alt="" class="h-5 w-5">
+                    </span>
+                    Admin
+                </p>
+                <div class="border border-[rgba(0_0_0_/_0.2)] rounded-full h-12 w-12">
+                    <img src="../assets/pictures/picture5.jpg" class="h-full w-full rounded-full" alt="img">
+                </div>
+            </div>
         </div>
 
         <div id="toggleBtn" class="md:hidden h-[13px] w-[25px] flex flex-col justify-between cursor-pointer">
@@ -39,7 +101,7 @@
             <aside
                 class="hidden md:flex flex-col justify-between w-60 border-r-[1.5px] border-[rgba(0_0_0_/_0.175)] flex-shrink-0 py-13 px-7">
                 <div class="font-medium flex flex-col gap-1.5 w-full">
-                    <a href="../index.html"
+                    <a href="./admin.html"
                         class="flex gap-2 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -50,15 +112,24 @@
                         </svg>
                         Home
                     </a>
-                    <a href="./technician.html"
+                    <a href="./users.html"
                         class="flex gap-2 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-wrench-icon lucide-wrench">
-                            <path
-                                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" />
+                            class="lucide lucide-user-round-cog-icon lucide-user-round-cog">
+                            <path d="m14.305 19.53.923-.382" />
+                            <path d="m15.228 16.852-.923-.383" />
+                            <path d="m16.852 15.228-.383-.923" />
+                            <path d="m16.852 20.772-.383.924" />
+                            <path d="m19.148 15.228.383-.923" />
+                            <path d="m19.53 21.696-.382-.924" />
+                            <path d="M2 21a8 8 0 0 1 10.434-7.62" />
+                            <path d="m20.772 16.852.924-.383" />
+                            <path d="m20.772 19.148.924.383" />
+                            <circle cx="10" cy="8" r="5" />
+                            <circle cx="18" cy="18" r="3" />
                         </svg>
-                        Technicians
+                        Users
                     </a>
                     <a href="./orderList.html"
                         class="flex gap-2 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)]">
@@ -93,7 +164,7 @@
                     </a>
                 </div>
                 <div>
-                    <button
+                    <button id="logout"
                         class="flex gap-2 items-center font-medium text-red-500 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)] cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -108,9 +179,19 @@
             </aside>
 
             <!-- Contenu -->
-            <main class="flex-1 bg-gray-50 md:overflow-y-auto h-fit md:h-full w-full py-6 px-4">
-                <h1 class="ml-6 text-2xl mt-2 mb-8 font-medium flex items-center gap-2">
-                </h1>
+            <main class="flex-1 bg-gray-50 md:overflow-y-auto h-fit md:h-full w-full py-6 px-8 relative">
+                <div
+                    class="absolute top-0 left-0 w-full h-[7vh] bg-white border-b border-[rgba(0_0_0_/_0.175)] flex justify-between items-center px-8">
+                    <h1 class="text-[20px] font-medium flex justify-center items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-clock-icon lucide-clock">
+                            <path d="M12 6v6l4 2" />
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                        Historical
+                    </h1>
+                </div>
 
             </main>
 

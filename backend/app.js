@@ -5,6 +5,8 @@ import db from './database/db.js'
 import cookieParser from 'cookie-parser'
 import authRoutes from './routes/authRoute.js'
 import dashboard from './routes/dashboard.js'
+import { authMiddleware, verifyRole } from "./middleware/authMiddleware.js";
+import { fileURLToPath } from "url";
 import cors from 'cors'
 
 const app = express()
@@ -21,9 +23,15 @@ app.get('/', (req, res) => {
     res.send('API backend en ligne !')
 })
 
+app.get("/signup", authMiddleware, verifyRole(['admin']));
+
+
 // Routes
 app.use('/admin/auth', authRoutes)
-app.use('/admin', dashboard)
+app.use('/dashboard', dashboard)
+app.use('/users/auth', authRoutes)
+// Servir les dashboard protégé
+// app.use('/technician')
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {

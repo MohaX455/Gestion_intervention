@@ -1,14 +1,14 @@
 import express from 'express'
-import { registerAdmin, loginAdmin } from '../controllers/AdminAuthController.js'
+import { register, login } from '../controllers/authControllers.js'
 
 const router = express.Router()
 
 // Routes d'authentification
-router.post('/register', registerAdmin)
-router.post('/login', loginAdmin)
+router.post('/register', register)
+router.post('/login', login)
 router.post("/logout", (req, res) => {
   res.clearCookie("token");
   res.json({ message: "Logged out" });
 });
 
-export default router
+export default router 

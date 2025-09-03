@@ -5,10 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', async (e) => {
 
-        const name = document.querySelector('#name').value
-        const email = document.querySelector('#email').value
-        const password = document.querySelector('#password').value
+        const name = document.querySelector('#name').value.trim()
+        const email = document.querySelector('#email').value.trim()
+        const password = document.querySelector('#password').value.trim()
         const message = document.querySelector('#message')
+        message.textContent = "";
 
         e.preventDefault()
 
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     name,
                     email,
                     password,
+                    role: 'admin'
                 })
             })
 

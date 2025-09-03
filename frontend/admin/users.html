@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Dashboard | Admin</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nata+Sans:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+        /* Cache la scrollbar mais garde le scroll */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            /* IE et Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
+</head>
+
+<body class="h-screen flex flex-col text-[#333] tracking-wide font-['Quicksand']">
+
+    <!-- Navbar -->
+    <header
+        class="h-[7.75vh] border-[1.5px] border-[rgba(0_0_0_/_0.175)] flex flex-row-reverse md:flex-row justify-between items-center px-4 md:px-8 flex-shrink-0">
+        <div class="flex justify-center items-center">
+            <a href="./admin.html"
+                class="text-[20px] font-medium cursor-pointer flex justify-center items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-circle-gauge-icon lucide-circle-gauge">
+                    <path d="M15.6 2.7a10 10 0 1 0 5.7 5.7" />
+                    <circle cx="12" cy="12" r="2" />
+                    <path d="M13.4 10.6 19 5" />
+                </svg>
+                Dashboard
+            </a>
+        </div>
+
+        <div class="flex justify-center items-center gap-20">
+
+            <div class="hidden md:block relative w-100">
+                <input type="text" placeholder="Search..."
+                    class="w-full pl-10 pr-4 py-2 rounded-full border-[1.5px] border-[rgba(0_0_0_/_0.2)] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition" />
+                <!-- Icône de recherche -->
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search-icon lucide-search">
+                        <path d="m21 21-4.34-4.34" />
+                        <circle cx="11" cy="11" r="8" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="flex justify-center items-center">
+                <!-- Icône cloche -->
+                <button class="text-gray-600 hover:text-gray-800 relative cursor-pointer rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="h-7 w-7 text-gray-500 lucide lucide-bell-icon lucide-bell">
+                        <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+                        <path
+                            d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
+                    </svg>
+                    <!-- Badge -->
+                    <span class="absolute -top-1.5 -right-1 bg-red-500 border-2 border-white text-white text-xs px-1 rounded-full font-bold">
+                        5
+                    </span>
+                </button>
+            </div>
+
+            <div class="hidden md:flex justify-center items-center gap-2 h-full">
+                <p class="text-[16px] font-[600] flex justify-center items-center flex-col h-full mt-1.5">
+                    <span>
+                        <img src="../assets/icons/icon6.png" alt="" class="h-5 w-5">
+                    </span>
+                    Admin
+                </p>
+                <div class="border border-[rgba(0_0_0_/_0.2)] rounded-full h-12 w-12">
+                    <img src="../assets/pictures/picture5.jpg" class="h-full w-full rounded-full" alt="img">
+                </div>
+            </div>
+        </div>
+
+        <div id="toggleBtn" class="md:hidden h-[13px] w-[25px] flex flex-col justify-between cursor-pointer">
+            <span class="h-[3px] w-full bg-[#555] rounded-full"></span>
+            <span class="h-[3px] w-[18px] bg-[#555] rounded-full"></span>
+        </div>
+    </header>
+
+    <!-- Partie principale -->
+    <div class="flex flex-col md:h-[92.25vh]">
+        <div class="flex flex-1 md:overflow-hidden">
+            <!-- Sidebar -->
+            <aside
+                class="hidden md:flex flex-col justify-between w-60 border-r-[1.5px] border-[rgba(0_0_0_/_0.175)] flex-shrink-0 py-13 px-7">
+                <div class="font-medium flex flex-col gap-1.5 w-full">
+                    <a href="./admin.html"
+                        class="flex gap-2 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-house-icon lucide-house">
+                            <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+                            <path
+                                d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        </svg>
+                        Home
+                    </a>
+                    <a href="./users.html"
+                        class="flex gap-2 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-user-round-cog-icon lucide-user-round-cog">
+                            <path d="m14.305 19.53.923-.382" />
+                            <path d="m15.228 16.852-.923-.383" />
+                            <path d="m16.852 15.228-.383-.923" />
+                            <path d="m16.852 20.772-.383.924" />
+                            <path d="m19.148 15.228.383-.923" />
+                            <path d="m19.53 21.696-.382-.924" />
+                            <path d="M2 21a8 8 0 0 1 10.434-7.62" />
+                            <path d="m20.772 16.852.924-.383" />
+                            <path d="m20.772 19.148.924.383" />
+                            <circle cx="10" cy="8" r="5" />
+                            <circle cx="18" cy="18" r="3" />
+                        </svg>
+                        Users
+                    </a>
+                    <a href="./orderList.html"
+                        class="flex gap-2 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-clipboard-check-icon lucide-clipboard-check">
+                            <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                            <path d="m9 14 2 2 4-4" />
+                        </svg>
+                        Order list
+                    </a>
+                    <a href="./reports.html"
+                        class="flex gap-2 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-trending-up-icon lucide-trending-up">
+                            <path d="M16 7h6v6" />
+                            <path d="m22 7-8.5 8.5-5-5L2 17" />
+                        </svg>
+                        Reports
+                    </a>
+                    <a href="./historical.html"
+                        class="flex gap-2 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-clock-icon lucide-clock">
+                            <path d="M12 6v6l4 2" />
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                        Historical
+                    </a>
+                </div>
+                <div>
+                    <button id="logout"
+                        class="flex gap-2 items-center font-medium text-red-500 w-[90%] py-1.5 px-2 rounded-md transition-all duration-300 hover:bg-gray-100 border border-[transparent] hover:border-[rgba(0_0_0_/_0.075)] cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-log-out-icon lucide-log-out">
+                            <path d="m16 17 5-5-5-5" />
+                            <path d="M21 12H9" />
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        </svg>
+                        Logout
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Contenu -->
+            <main
+                class="flex-1 bg-gray-50 md:overflow-y-auto scrollbar-hide h-fit md:h-full w-full py-6 px-2 md:px-8 relative">
+                <div
+                    class="absolute top-0 left-0 w-full h-[7vh] bg-white border-b border-[rgba(0_0_0_/_0.175)] flex justify-between items-center px-8">
+                    <h1 class="text-[20px] font-medium flex justify-center items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="mb-1 lucide lucide-user-round-cog-icon lucide-user-round-cog">
+                            <path d="m14.305 19.53.923-.382" />
+                            <path d="m15.228 16.852-.923-.383" />
+                            <path d="m16.852 15.228-.383-.923" />
+                            <path d="m16.852 20.772-.383.924" />
+                            <path d="m19.148 15.228.383-.923" />
+                            <path d="m19.53 21.696-.382-.924" />
+                            <path d="M2 21a8 8 0 0 1 10.434-7.62" />
+                            <path d="m20.772 16.852.924-.383" />
+                            <path d="m20.772 19.148.924.383" />
+                            <circle cx="10" cy="8" r="5" />
+                            <circle cx="18" cy="18" r="3" />
+                        </svg>
+                        User <span class="hidden md:block">Management</span>
+                    </h1>
+
+                    <div class="flex items-center gap-20">
+                        <!-- Segmented control -->
+                        <div
+                            class="p-2 px-4 h-full hidden md:flex justify-center items-center gap-2 rounded-sm text-gray-600">
+                            <label class="relative">
+                                <input type="radio" name="roleSeg" value="All" class="sr-only peer" checked />
+                                <span
+                                    class="border border-[rgba(0_0_0_/_0.175)] rounded-3xl h-9 w-[80px] text-[#999] hover:border-[rgba(0_0_0_/_0.4)] hover:text-[#555] text-sm cursor-pointer peer-checked:text-[#555] peer-checked:border-[rgba(0_0_0_/_0.4)] font-medium flex justify-center items-center gap-1.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-layers-icon lucide-layers">
+                                        <path
+                                            d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
+                                        <path
+                                            d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
+                                        <path
+                                            d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
+                                    </svg>
+                                    All
+                                </span>
+                            </label>
+
+                            <label class="relative ml-1">
+                                <input type="radio" name="roleSeg" value="technician" class="sr-only peer" />
+                                <span
+                                    class="border border-[rgba(0_0_0_/_0.175)] rounded-3xl h-9 px-3 text-[#999] hover:border-[rgba(0_0_0_/_0.4)] hover:text-[#555] text-sm cursor-pointer select-none peer-checked:bg-white peer-checked:text-[#555] peer-checked:border-[rgba(0_0_0_/_0.4)] font-medium flex items-center gap-0.75">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-wrench-icon lucide-wrench">
+                                        <path
+                                            d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" />
+                                    </svg>
+                                    Technicians
+                                </span>
+                            </label>
+
+                            <label class="relative ml-1">
+                                <input type="radio" name="roleSeg" value="secretary" class="sr-only peer" />
+                                <span
+                                    class="border border-[rgba(0_0_0_/_0.175)] rounded-3xl h-9 px-3 text-[#999] hover:border-[rgba(0_0_0_/_0.4)] hover:text-[#555] text-sm cursor-pointer select-none peer-checked:bg-white peer-checked:text-[#555] peer-checked:border-[rgba(0_0_0_/_0.4)] font-medium flex items-center gap-0.75">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-clipboard-pen-icon lucide-clipboard-pen">
+                                        <rect width="8" height="4" x="8" y="2" rx="1" />
+                                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5.5" />
+                                        <path d="M4 13.5V6a2 2 0 0 1 2-2h2" />
+                                        <path
+                                            d="M13.378 15.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
+                                    </svg>
+                                    Secretaries
+                                </span>
+                            </label>
+                        </div>
+
+                        <button id="openModalBtn"
+                            class="text-[15px] font-medium flex justify-center items-center gap-1 cursor-pointer bg-[#444] text-white h-9.5 w-18 rounded-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="text-[#fff] lucide lucide-plus-icon lucide-plus">
+                                <path d="M5 12h14" />
+                                <path d="M12 5v14" />
+                            </svg>
+                            Add
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- Modal -->
+
+                <div id="my_modal"
+                    class="z-50 fixed inset-0 bg-[rgba(0_0_0_/_0.5)] hidden justify-center items-center opacity-0 transition-opacity duration-22 font-['Montserrat']">
+                    <div id="modal_content"
+                        class="bg-white md:rounded-sm md:border border-[rgba(0_0_0_/_0.1)] md:shadow-[0px_14px_16px_rgba(0_0_0_/_0.075)] h-full md:h-fit w-full md:w-[600px] p-5 md:p-10 flex justify-center items-center transform scale-95 opacity-0 transition-all duration-300">
+                        <form id="form" action="" class="h-full w-full flex justify-center flex-col gap-10 md:gap-8">
+                            <div class="flex justify-end items-center -mb-10">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" id="closeModalBtn"
+                                    class="cursor-pointer lucide lucide-x-icon lucide-x">
+                                    <path d="M18 6 6 18" />
+                                    <path d="m6 6 12 12" />
+                                </svg>
+                            </div>
+                            <h2 class="text-[25px] font-medium text-center flex gap-2 items-center mx-auto mt-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-user-pen-icon lucide-user-pen">
+                                    <path d="M11.5 15H7a4 4 0 0 0-4 4v2" />
+                                    <path
+                                        d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
+                                    <circle cx="10" cy="7" r="4" />
+                                </svg>
+                                Create
+                            </h2>
+
+                            <div class="flex flex-col gap-4 w-full">
+                                <!-- username -->
+                                <div class="flex flex-col gap-4">
+                                    <label for="" class="font-medium">Enter the Username :</label>
+                                    <div
+                                        class="w-full h-[42px] flex items-center border-[1.5px] border-[rgba(0_0_0_/_0.3)] rounded-sm">
+                                        <div
+                                            class="h-full w-[42px] border-r-[1.5px] border-[rgba(0_0_0_/_0.3)] flex justify-center items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="text-[rgba(0_0_0_/_0.4)] lucide lucide-user-round-icon lucide-user-round">
+                                                <circle cx="12" cy="8" r="5" />
+                                                <path d="M20 21a8 8 0 0 0-16 0" />
+                                            </svg>
+                                        </div>
+                                        <div class="h-full flex-1">
+                                            <input type="text" name="" id="name" placeholder="Enter the name"
+                                                class="w-full h-full px-2.5 outline-none" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- email -->
+                                <div class="flex flex-col gap-4">
+                                    <label for="" class="font-medium">Email :</label>
+                                    <div
+                                        class="w-full h-[42px] flex items-center border-[1.5px] border-[rgba(0_0_0_/_0.3)] rounded-sm">
+                                        <div
+                                            class="h-full w-[42px] border-r-[1.5px] border-[rgba(0_0_0_/_0.3)] flex justify-center items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="text-[rgba(0_0_0_/_0.4)] lucide lucide-mail-icon lucide-mail">
+                                                <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+                                                <rect x="2" y="4" width="20" height="16" rx="2" />
+                                            </svg>
+                                        </div>
+                                        <div class="h-full flex-1">
+                                            <input type="email" name="" id="email" placeholder="Email"
+                                                class="w-full h-full px-2.5 outline-none" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- password -->
+                                <div class="flex flex-col gap-4">
+                                    <label for="" class="font-medium">Password :</label>
+                                    <div
+                                        class="w-full h-[42px] flex items-center border-[1.5px] border-[rgba(0_0_0_/_0.3)] rounded-sm">
+                                        <div
+                                            class="h-full w-[42px] border-r-[1.5px] border-[rgba(0_0_0_/_0.3)] flex justify-center items-center">
+                                            <svg id="lockIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="text-[rgba(0_0_0_/_0.4)] cursor-pointer transition-all duration-200 hover:text-[rgba(0_0_0_/_0.6)] lucide lucide-lock-keyhole-icon lucide-lock-keyhole">
+                                                <circle cx="12" cy="16" r="1" />
+                                                <rect x="3" y="10" width="18" height="12" rx="2" />
+                                                <path d="M7 10V7a5 5 0 0 1 10 0v3" />
+                                            </svg>
+                                        </div>
+                                        <div class="h-full flex-1">
+                                            <input type="password" name="" id="password" placeholder="Password"
+                                                class="w-full h-full px-2.5 outline-none" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Role -->
+                            <div class="flex flex-col justify-center gap-4">
+                                <label for="" class="font-medium">What role do you want to attribute ?</label>
+                                <div class="flex flex-col justify-center gap-5 mt-2">
+                                    <!-- Option 1 -->
+                                    <label class="flex items-center gap-2 cursor-pointer w-fit">
+                                        <input type="radio" name="role" value="technician" class="peer hidden" />
+                                        <span
+                                            class="w-4 h-4 rounded-full border-2 border-gray-400 flex items-center justify-center peer-checked:bg-blue-400 transition"></span>
+                                        <span
+                                            class="text-gray-700 peer-checked:text-blue-600 font-medium">Technician</span>
+                                    </label>
+
+                                    <!-- Option 2 -->
+                                    <label class="flex items-center gap-2 cursor-pointer w-fit">
+                                        <input type="radio" name="role" value="secretary" class="peer hidden" />
+                                        <span
+                                            class="w-4 h-4 rounded-full border-2 border-gray-400 flex items-center justify-center peer-checked:bg-blue-400 transition"></span>
+                                        <span
+                                            class="text-gray-700 peer-checked:text-blue-600 font-medium">Secretary</span>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <button type="submit"
+                                class="h-[50px] bg-[#333] text-white cursor-pointer font-['Montserrat'] font-medium rounded-sm flex items-center gap-0.5 justify-center flex-row-reverse">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="mt-1 lucide lucide-check-icon lucide-check">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                Save
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="p-6 mt-[7vh]">
+
+                    <!-- Tableau utilisateurs -->
+                    <div class="overflow-x-auto scrollbar-hide rounded-lg font-['Montserrat']">
+                        <table class="min-w-full bg-white border-[1.5px] border-[rgba(0_0_0_/_0.2)]">
+                            <thead">
+                                <tr class="bg-gray-50 text-left text-gray-600 uppercase text-sm">
+                                    <th class="py-6 px-4 border-[1.5px] border-[rgba(0_0_0_/_0.2)]">Name</th>
+                                    <th class="py-5 px-4 border-[1.5px] border-[rgba(0_0_0_/_0.2)]">Email</th>
+                                    <th class="py-5 px-4 border-[1.5px] border-[rgba(0_0_0_/_0.2)]">Role</th>
+                                    <th class="py-5 px-4 border-[1.5px] border-[rgba(0_0_0_/_0.2)]">Status</th>
+                                    <th class="py-5 px-4 border-[1.5px] border-[rgba(0_0_0_/_0.2)] text-center">Actions
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="text-gray-700 bg-white">
+                                    <tr class="border-b-[1.5px] border-[rgba(0_0_0_/_0.2)]">
+                                        <td class="py-5.5 px-4">Jean</td>
+                                        <td class="py-5 px-4">jean@example.com</td>
+                                        <td class="py-5 px-4">Secretary</td>
+                                        <td class="py-5 px-4">
+                                            <span
+                                                class="bg-green-100 text-green-700 font-medium px-3 py-2 rounded-full text-xs border border-[rgba(0_0_0_/_0.05)]">
+                                                Active
+                                            </span>
+                                        </td>
+                                        <td class="py-5 px-4 text-center">
+                                            <button class="cursor-pointer">
+                                                <!-- <img src="../assets/icons/new2.png" alt="" class="h-8.5 w-8.5"> -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="text-blue-500 lucide lucide-pen-line-icon lucide-pen-line">
+                                                    <path d="M13 21h8" />
+                                                    <path
+                                                        d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                                                </svg>
+                                            </button>
+                                            <button class="ml-4 cursor-pointer">
+                                                <!-- <img src="../assets/icons/new4.png" alt="" class="h-8.5 w-8.5"> -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="text-red-500 lucide lucide-trash2-icon lucide-trash-2">
+                                                    <path d="M10 11v6" />
+                                                    <path d="M14 11v6" />
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                                    <path d="M3 6h18" />
+                                                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b-[1.5px] border-[rgba(0_0_0_/_0.2)]">
+                                        <td class="py-5.5 px-4">Amina</td>
+                                        <td class="py-5 px-4">amina@example.com</td>
+                                        <td class="py-5 px-4">Technician</td>
+                                        <td class="py-5 px-4">
+                                            <span
+                                                class="bg-red-100 text-red-700 font-medium px-3 py-2 rounded-full text-xs border border-[rgba(0_0_0_/_0.05)]">
+                                                Inactive
+                                            </span>
+                                        </td>
+                                        <td class="py-5 px-4 text-center">
+                                            <button class="cursor-pointer">
+                                                <!-- <img src="../assets/icons/new2.png" alt="" class="h-8.5 w-8.5"> -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="text-blue-500 lucide lucide-pen-line-icon lucide-pen-line">
+                                                    <path d="M13 21h8" />
+                                                    <path
+                                                        d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                                                </svg>
+                                            </button>
+                                            <button class="ml-4 cursor-pointer">
+                                                <!-- <img src="../assets/icons/new4.png" alt="" class="h-8.5 w-8.5"> -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="text-red-500 lucide lucide-trash2-icon lucide-trash-2">
+                                                    <path d="M10 11v6" />
+                                                    <path d="M14 11v6" />
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                                    <path d="M3 6h18" />
+                                                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </main>
+
+        </div>
+
+        <!-- Footer -->
+        <footer>
+
+        </footer>
+
+    </div>
+    <script src="../js/script.js" defer></script>
+    <script src="../js/modal.js"></script>
+    <script src="../js/signup_login_lock.js" defer></script>
+    <script src="../js/users.js" defer></script>
+</body>
+
+</html>
